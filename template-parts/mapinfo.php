@@ -19,13 +19,30 @@ $swf_mitigation_map_link = ( get_field( 'swf_mitigation_map_link' ) ? get_field(
         ?>
         <div class="mitigation__content">
             <ul class="mitigation__child-listing">
-        <?php
-            wp_list_pages( $args ); 
-        ?> 
+            <?php if( is_page('ohio') ) : ?> 
+                <li>
+                    <a href="http://streamwetlands.maps.arcgis.com/apps/Viewer/index.html?appid=fd8ee816d5a04ad0a41d3ddf89afb575">
+                        <strong>Click Here for Interactive Ohio Map</strong>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php wp_list_pages( $args ); ?> 
             </ul>
         </div>
     <?php else : ?>
         <div class="panel-group" id="accordion">
+            <?php if( $swf_mitigation_map_link != '' ) : ?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="<?php echo $swf_mitigation_map_link; ?>">
+                                <strong><?php _e( 'Interactive Service Area', 'swf' ); ?></strong>
+                            </a>
+                        </h4>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <?php if( $swf_mitigation_site_data != '' ) : ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -56,23 +73,6 @@ $swf_mitigation_map_link = ( get_field( 'swf_mitigation_map_link' ) ? get_field(
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
                             <?php echo $swf_mititgation_habitat; ?>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-
-             <?php if( $swf_maitigation_service_area != '' ) : ?>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapseThree">
-                                <?php _e( 'Service Area', 'swf' ); ?>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse3" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <?php echo $swf_maitigation_service_area; ?>
                         </div>
                     </div>
                 </div>
@@ -128,17 +128,6 @@ $swf_mitigation_map_link = ( get_field( 'swf_mitigation_map_link' ) ? get_field(
                 </div>
             <?php endif; ?>
 
-            <?php if( $swf_mitigation_map_link != '' ) : ?>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a href="<?php echo $swf_mitigation_map_link; ?>">
-                                <?php _e( 'Interactive Map', 'swf' ); ?>
-                            </a>
-                        </h4>
-                    </div>
-                </div>
-            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
